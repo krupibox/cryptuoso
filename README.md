@@ -1,1 +1,1 @@
-# robots
+Run npm run dev and type [localhost](localhost)
