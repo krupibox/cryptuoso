@@ -44,7 +44,7 @@ const Form = ({ settings, onFormSubmit }) => {
                     margin-top: 10px;
                     margin-bottom: 10px;
                 }
-                form {margin-bottom: 50px}
+                form {margin-bottom: 20px}
             `}</style>
     </>)
 }
