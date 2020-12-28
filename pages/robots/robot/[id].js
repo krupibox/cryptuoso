@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
+import DetailRobot from '../../../components/detail-robot';
 
 const GET_ROBOT = gql`
-query MyQuery($queryId: uuid_comparison_exp = {}) {
-  robots(where: {id: $queryId}) {
+query MyQuery($id: uuid_comparison_exp = {}) {
+  robots(where: {id: $id}) {
     name
     id
     robot_settings {
@@ -14,39 +14,28 @@ query MyQuery($queryId: uuid_comparison_exp = {}) {
 }
   `;
 
-export default function Robot() {
-  const router = useRouter()
-
-  const { id: queryId } = router.query
+function Robot({ id }) {
 
   const { loading, error, data } = useQuery(GET_ROBOT, {
     variables: {
-      id: { "_eq": queryId },
+      id: { "_eq": id },
     },
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const {
-    id: robotId,
-    name: robotName,
-    robot_settings: settings
-  } = data.robots[0];
-
   return (<>
-    <p>Detail Robot <b>Id</b>: {robotId}</p>
-    <p>Detail Robot <b>Name</b>: {robotName}</p>
-    <p>Detail Robot <b>Settings:</b></p>
-    <ul>
-      {
-        Object.entries(settings.robot_settings)
-          .map(([key, value]) => <li key={`${robotId}-${key}`}><b>{key}</b>: {value}</li>)
-      }
-    </ul>
+    <DetailRobot {...data.robots[0]}/>
     <Link href="/robots">
       <a>Back to list</a>
     </Link>
   </>)
 }
 
+Robot.getInitialProps = async (ctx) => {
+
+  return { id: ctx.query.id }
+}
+
+export default Robot;

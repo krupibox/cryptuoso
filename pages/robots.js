@@ -12,7 +12,7 @@ const GET_ROBOTS = gql`
   `;
 
 export default function Robots() {
-    const ROBOTS_LIMIT = 10;
+    const ROBOTS_LIMIT = 2;
     const [offset, setOffset] = useState(0);
     const { loading, error, data, fetchMore } = useQuery(GET_ROBOTS, {
         variables: {
@@ -21,18 +21,17 @@ export default function Robots() {
         },
     });
 
-    if (loading) return <div><p>Loading...</p></div>;
-    if (error) return <div><p>Error :(</p></div>;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
 
     const onLoadMore = () => {
-        const currentLength = data.robots.length;
         fetchMore({
             variables: {
-                offset: currentLength + data.robots.length
+                offset: data.robots.length
             }
         }
-        ).then(fetchMoreResult => {
-            setOffset(currentLength + fetchMoreResult.data.robots.length);
+        ).then(moreResult => {
+            setOffset(moreResult.data.robots.length + ROBOTS_LIMIT);
         });
     };
 
