@@ -33,7 +33,7 @@ function Robot({ id }) {
   </>)
 }
 
-Robot.getInitialProps = async (ctx) => {
+Robot.getInitialProps = (ctx) => {
 
   return { id: ctx.query.id }
 }
