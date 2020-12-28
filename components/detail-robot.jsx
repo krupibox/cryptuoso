@@ -7,8 +7,6 @@ const DetailRobot = ({ id, name, robot_settings }) => {
   const { robot_settings: settings } = robot_settings;
   const [formValue, setFormValue] = useState(``);
 
-  const { volue, volueType } = formValue;
-
   const handleSubmit = (formValue) => {
     setFormValue(formValue);
   };
