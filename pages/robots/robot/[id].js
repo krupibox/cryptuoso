@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import DetailRobot from '../../../components/detail-robot';
 
 const GET_ROBOT = gql`
-query MyQuery($id: uuid_comparison_exp = {}) {
+query MyQuery($id: uuid_comparison_exp) {
   robots(where: {id: $id}) {
     name
     id
@@ -15,10 +15,9 @@ query MyQuery($id: uuid_comparison_exp = {}) {
   `;
 
 function Robot({ id }) {
-
   const { loading, error, data } = useQuery(GET_ROBOT, {
     variables: {
-      id: { "_eq": id },
+      id: { "_eq": `${id}` },
     },
   });
 
@@ -26,7 +25,7 @@ function Robot({ id }) {
   if (error) return <p>Error :(</p>;
 
   return (<>
-    <DetailRobot {...data.robots[0]} />
+    <DetailRobot {...data.robots[data.robots.findIndex((robot) => robot.id === id)]} />
     <Link href="/robots">
       <a>Back to list</a>
     </Link>

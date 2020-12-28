@@ -2,23 +2,26 @@ import Link from 'next/link';
 
 const Robot = ({ id, name }) => {
 
-    return (
+    return (<>
         <ul>
             <li>
                 <Link href={`/robots/robot/${id}`}>
                     <a>
-                        <p>Robot <b>Id</b>: {id}</p>
-                        <p>Robot <b>Name:</b>: {name}</p>
+                        <p><b>Id</b>: {id}</p>
+                        <p><b>Name:</b>: {name}</p>
                     </a>
                 </Link>
-                <style jsx>{`
+            </li>
+        </ul>
+        <style jsx>{`
+                ul {margin-bottom: 20px}
+                li {line-height: 1}
                 li a:focus,
-                li a:hover {color: green;}
+                li a:hover {color: red;}
                 a {text-decoration: none;
                     color: black;}
-            `}</style>
-            </li>
-        </ul>)
+            `}</style>   
+       </> )
 }
 
 export default Robot;

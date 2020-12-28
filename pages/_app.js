@@ -14,7 +14,9 @@ export default function App({ Component, pageProps }) {
                         font-weight: 400;
                         font-family: sans-serif;
                         }
-                        h1 { font-weight: 700;}
+                        h1 {
+                            font-size: 18px;
+                            font-weight: 700;}
                         p { margin-bottom: 10px;}
                         }
       `}</style>

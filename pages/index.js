@@ -1,15 +1,11 @@
 import Router from 'next/router';
 import { useEffect } from 'react';
 
-export default () => {
+export default function App () {
 
   useEffect(() => {
     Router.push('/robots');
   }, []);
 
-  return (
-    <style jsx global>{`
-      body {color: blue}
-  `}</style>
-  );
+  return null;
 }
