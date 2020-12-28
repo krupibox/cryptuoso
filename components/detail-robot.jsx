@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import Form from '../components/form';
 
 const DetailRobot = ({ id, name, robot_settings }) => {

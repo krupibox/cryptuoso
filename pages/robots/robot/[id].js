@@ -28,7 +28,7 @@ function Robot({ id }) {
     <DetailRobot {...data.robots[data.robots.findIndex((robot) => robot.id === id)]} />
     <Link href="/robots">
       <a>Back to list</a>
-    </Link>
+    </Link> 
   </>)
 }
 

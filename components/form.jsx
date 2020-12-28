@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 const Form = ({ settings, onFormSubmit }) => {
@@ -16,8 +17,8 @@ const Form = ({ settings, onFormSubmit }) => {
         }}>
             {
                 Object.entries(settings)
-                    .map(([key, val]) => (<>
-                        <label key={`${key}-${val}`}><b>{key}</b>:
+                    .map(([key, _]) => (<React.Fragment key={key}>
+                        <label><b>{key}</b>:
                             <input
                                 name={key}
                                 onChange={(evt) => {
@@ -26,7 +27,7 @@ const Form = ({ settings, onFormSubmit }) => {
                                 }}
                             />
                         </label>
-                    </>)
+                    </React.Fragment>)
                     )}
             <button type="submit">Update form</button>
         </form>
@@ -37,11 +38,13 @@ const Form = ({ settings, onFormSubmit }) => {
                 }
                 input {
                     margin-left: auto;
+                    margin-bottom: 5px;
                 }
                 button {
                     margin-top: 10px;
                     margin-bottom: 10px;
                 }
+                form {margin-bottom: 50px}
             `}</style>
     </>)
 }
