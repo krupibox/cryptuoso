@@ -5,8 +5,11 @@ import Robot from '../components/robot';
 const GET_ROBOTS = gql`
   query MyQuery($offset: Int, $limit: Int) {
     robots(offset: $offset, limit: $limit) {
-      id
-      name
+        id
+        name
+        robot_settings {
+        robot_settings
+        }
     }
   }
   `;
@@ -36,7 +39,7 @@ export default function Robots() {
     };
 
     return (<>
-        { data.robots.map((robot, index) => <Robot key={`${robot.id}-${index}`} robot={robot} />)}
+        { data.robots.map((robot, index) => <Robot key={`${robot.id}-${index}`} {...robot} />)}
         <button onClick={onLoadMore}>LoadMore</button>
     </>);
 }

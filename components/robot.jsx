@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-const Robot = ({ robot }) => {
-
-    const { id, name } = robot;
+const Robot = ({ id, name }) => {
 
     return (
         <ul>

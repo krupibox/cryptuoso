@@ -26,16 +26,13 @@ function Robot({ id }) {
   if (error) return <p>Error :(</p>;
 
   return (<>
-    <DetailRobot {...data.robots[0]}/>
+    <DetailRobot {...data.robots[0]} />
     <Link href="/robots">
       <a>Back to list</a>
     </Link>
   </>)
 }
 
-Robot.getInitialProps = (ctx) => {
-
-  return { id: ctx.query.id }
-}
+Robot.getInitialProps = (context) => ({ id: context.query.id });
 
 export default Robot;

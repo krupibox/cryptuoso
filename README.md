@@ -1,1 +1,5 @@
-Run npm run dev and type [localhost](localhost)
+Run
+```
+npm run dev
+```
+and type url [localhost](localhost)
