@@ -2,6 +2,8 @@ import Form from '../components/form';
 
 const DetailRobot = ({ id, name, robot_settings }) => {
 
+  const {robot_settings: settings} = robot_settings;
+
   return (<>
     <h1>Detail Robot</h1>
     <ul>
@@ -10,7 +12,7 @@ const DetailRobot = ({ id, name, robot_settings }) => {
       <li><b>Settings:</b></li>
       <ul>
         {
-          Object.entries(robot_settings.robot_settings)
+          Object.entries(settings)
             .map(([key, value]) => <li key={`${id}-${key}`}><b>{key}</b>: {value}</li>)
         }
       </ul>
@@ -19,7 +21,7 @@ const DetailRobot = ({ id, name, robot_settings }) => {
             `}</style>
     </ul>
 
-    <Form />
+    <Form settings={settings}/>
 
   </>)
 }

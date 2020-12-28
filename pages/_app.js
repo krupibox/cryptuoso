@@ -10,14 +10,21 @@ export default function App({ Component, pageProps }) {
                 <Component {...pageProps} />
                 <style jsx global>{`
                         body {
-                        font-size: 14px;
-                        font-weight: 400;
-                        font-family: sans-serif;
+                            font-size: 14px;
+                            font-weight: 400;
+                            font-family: sans-serif;
                         }
                         h1 {
                             font-size: 18px;
-                            font-weight: 700;}
-                        p { margin-bottom: 10px;}
+                            font-weight: 700;
+                            }
+                        h2 {
+                            font-size: 16px;
+                            font-weight: 300;
+                            }
+                        p {
+                            margin-bottom: 10px;
+                            }
                         }
       `}</style>
             </div>
