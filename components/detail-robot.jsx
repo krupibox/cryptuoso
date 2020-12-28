@@ -1,8 +1,17 @@
+import { useState } from 'react';
+
 import Form from '../components/form';
 
 const DetailRobot = ({ id, name, robot_settings }) => {
 
-  const {robot_settings: settings} = robot_settings;
+  const { robot_settings: settings } = robot_settings;
+  const [formValue, setFormValue] = useState(``);
+
+  const { volue, volueType } = formValue;
+
+  const handleSubmit = (formValue) => {
+    setFormValue(formValue);
+  };
 
   return (<>
     <h1>Detail Robot</h1>
@@ -13,7 +22,9 @@ const DetailRobot = ({ id, name, robot_settings }) => {
       <ul>
         {
           Object.entries(settings)
-            .map(([key, value]) => <li key={`${id}-${key}`}><b>{key}</b>: {value}</li>)
+            .map(([key, value]) => <li key={`${id}-${key}`}>
+              <b>{key}</b>: {formValue[key] || value}
+            </li>)
         }
       </ul>
       <style jsx>{`
@@ -21,7 +32,10 @@ const DetailRobot = ({ id, name, robot_settings }) => {
             `}</style>
     </ul>
 
-    <Form settings={settings}/>
+    <Form
+      settings={settings}
+      onFormSubmit={handleSubmit}
+    />
 
   </>)
 }

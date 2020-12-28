@@ -1,16 +1,29 @@
+import { useState } from 'react';
 
-const Form = ({ settings }) => {
+const Form = ({ settings, onFormSubmit }) => {
+
+    const [value, setValue] = useState();
 
     return (<>
         <h2>Robot Form</h2>
-        <form>
+        <form onSubmit={(evt) => {
+            evt.preventDefault();
+            onFormSubmit(value)
+        }}>
             {
                 Object.entries(settings)
-                    .map(([key, value]) => (<>
-                            <label htmlFor={key}><b>{key}</b>:
-                            <input id={key} value={value} />
-                            </label>
-                            </>)
+                    .map(([key, val]) => (<>
+                        <label key={`${key}-${val}`}><b>{key}</b>:
+                            <input
+                                name={key}
+                                // value={}
+                                onChange={(evt) => {
+                                    const { name, value } = evt.target;
+                                    setValue({ [name]: value });
+                                }}
+                            />
+                        </label>
+                    </>)
                     )}
             <button type="submit">Update form</button>
         </form>
