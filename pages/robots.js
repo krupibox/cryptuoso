@@ -36,7 +36,7 @@ export default function Robots() {
     };
 
     return (<>
-        { data.robots.map(robot => <Robot key={robot.id} robot={robot} />)}
+        { data.robots.map((robot, index) => <Robot key={`${robot.id}-${index}`} robot={robot} />)}
         <button onClick={onLoadMore}>LoadMore</button>
     </>);
 }
