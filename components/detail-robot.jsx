@@ -1,3 +1,5 @@
+import Form from '../components/form';
+
 const DetailRobot = ({ id, name, robot_settings }) => {
 
   return (<>
@@ -16,6 +18,9 @@ const DetailRobot = ({ id, name, robot_settings }) => {
             li {line-height: 2}
             `}</style>
     </ul>
+
+    <Form />
+
   </>)
 }
 
