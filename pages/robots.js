@@ -12,7 +12,7 @@ const GET_ROBOTS = gql`
   `;
 
 export default function Robots() {
-    const ROBOTS_LIMIT = 2;
+    const ROBOTS_LIMIT = 10;
     const [offset, setOffset] = useState(0);
     const { loading, error, data, fetchMore } = useQuery(GET_ROBOTS, {
         variables: {
