@@ -3,6 +3,13 @@ import { useQuery, gql } from '@apollo/client';
 import { NextPage } from 'next';
 import Robot from '../components/robot';
 
+interface RobotsData {
+    robots: {
+      id: string;
+      code: string;
+    }
+  }
+
 const GET_ROBOTS = gql`
     query GetRobots($offset: Int!, $limit: Int!) {
         robots(offset: $offset, limit: $limit) {
@@ -21,7 +28,7 @@ const Robots: NextPage = () => {
     const [offset, setOffset] = useState<number>(Query.OFFSET);
     const [button, toogleButton] = useState<boolean>(false);
 
-    const { loading, error, data, fetchMore } = useQuery(GET_ROBOTS, {
+    const { loading, error, data, fetchMore } = useQuery<RobotsData>(GET_ROBOTS, {
         variables: {
             offset,
             limit: Query.LIMIT

@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useQuery, gql } from '@apollo/client';
 import DetailRobot from '../../../components/detail-robot';
 
-interface RobotsData {
+interface RobotData {
   robots: {
     id: string;
     name: string;
@@ -33,7 +33,7 @@ interface Props {
 }
 
 const Robot: NextPage<Props> = ({ id }) => {
-  const { loading, error, data } = useQuery<RobotsData>(GET_ROBOT, {
+  const { loading, error, data } = useQuery<RobotData>(GET_ROBOT, {
     variables: {
       id: { "_eq": `${id}` },
     },
