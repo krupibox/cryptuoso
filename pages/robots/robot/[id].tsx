@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { NextPage } from 'next';
 import { useQuery, gql } from '@apollo/client';
 import DetailRobot from '../../../components/detail-robot';
 
 const GET_ROBOT = gql`
-query MyQuery($id: uuid_comparison_exp) {
+query GetRobot($id: uuid_comparison_exp) {
   robots(where: {id: $id}) {
     name
     id
@@ -14,7 +15,11 @@ query MyQuery($id: uuid_comparison_exp) {
 }
   `;
 
-function Robot({ id }) {
+interface Props {
+  id: string;
+}
+
+const Robot: NextPage<Props> = ({ id }) =>  {
   const { loading, error, data } = useQuery(GET_ROBOT, {
     variables: {
       id: { "_eq": `${id}` },
@@ -25,13 +30,13 @@ function Robot({ id }) {
   if (error) return <p>Error :(</p>;
 
   return (<>
-    <DetailRobot {...data.robots[data.robots.findIndex((robot) => robot.id === id)]} />
+    <DetailRobot {...data.robots[data.robots.findIndex((robot: any) => robot.id === id)]} />
     <Link href="/robots">
       <a>Back to list</a>
     </Link> 
   </>)
 }
 
-Robot.getInitialProps = (context) => ({ id: context.query.id });
+Robot.getInitialProps = (context: any) => ({ id: context.query.id });
 
 export default Robot;

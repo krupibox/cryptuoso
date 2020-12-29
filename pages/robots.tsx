@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { NextPage } from 'next';
 import Robot from '../components/robot';
 
 const GET_ROBOTS = gql`
-    query MyQuery($offset: Int!, $limit: Int!) {
+    query GetRobots($offset: Int!, $limit: Int!) {
         robots(offset: $offset, limit: $limit) {
             id
             name
@@ -14,7 +15,7 @@ const GET_ROBOTS = gql`
     }
 `;
 
-const Robots: React.FC = ()  => {
+const Robots: NextPage = () => {
     enum Query {
         OFFSET = 0,
         LIMIT = 10
@@ -29,15 +30,15 @@ const Robots: React.FC = ()  => {
         }
     });
 
-    if (loading) return <>Loading...</>;
-    if (error) return <p>Error : (</p>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error : (</div>;
 
-    const onLoadMore = ():void => {
+    const handleLoadMore = (e: MouseEvent<HTMLElement>) => {
         fetchMore({
             variables: {
                 offset: data.robots.length + Query.LIMIT
             }
-        }).then((moreResult: object) => {
+        }).then((moreResult: { data: any }) => {
             setOffset(moreResult.data.robots.length);
         });
     };
@@ -45,10 +46,10 @@ const Robots: React.FC = ()  => {
     return (
         <>
             <h1>Robots </h1>
-            {data.robots.map((robot: number[], index:number) => (
-                <Robot key={`${robot.id}-${index}`} {...robot} />
+            {data.robots.map((robot: { id: string, name: string }) => (
+                <Robot key={robot.id} {...robot} />
             ))}
-            <button onClick={onLoadMore}> Load more </button>
+            <button onClick={handleLoadMore}>Load more</button>
         </>
     );
 };

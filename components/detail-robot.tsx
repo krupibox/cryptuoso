@@ -7,9 +7,9 @@ type FormValueArgsType = {
 }
 
 interface Props {
-  id: String;
+  id: string;
   name: string;
-  robot_settings: object;
+  robot_settings: { robot_settings: FormValueArgsType };
 }
 
 const DetailRobot: React.FC<Props> = ({ id, name, robot_settings }): JSX.Element => {
@@ -21,7 +21,7 @@ const DetailRobot: React.FC<Props> = ({ id, name, robot_settings }): JSX.Element
     volumeType: ``
   });
 
-  const handleSubmit = (formValue) => {
+  const handleSubmit = (formValue: FormValueArgsType) => {
     setFormValue(formValue);
   };
 

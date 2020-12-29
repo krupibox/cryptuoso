@@ -1,7 +1,8 @@
 import Router from 'next/router';
+import { NextPage } from 'next';
 import { useEffect } from 'react';
 
-export default function App() {
+const App: NextPage = () => {
 
   useEffect(() => {
     Router.push('/robots');
@@ -9,3 +10,5 @@ export default function App() {
 
   return null;
 }
+
+export default App;

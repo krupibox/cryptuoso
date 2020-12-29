@@ -1,42 +1,43 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, ChangeEvent, Fragment } from 'react';
 
 type FormValueArgsType = {
-        volume: string;
-        volumeType: string;
+    volume: string;
+    volumeType: string;
 }
 
 interface Props {
-    settings: object;
+    settings: FormValueArgsType;
     onFormSubmit: (args: FormValueArgsType) => void;
 }
 
-const Form: React.FC<Props> = ({ settings, onFormSubmit }): JSX.Element => {
+const Form: React.FC<Props> = ({ settings, onFormSubmit }) => {
 
     const [valueInput, setValue] = useState<FormValueArgsType>({
         volume: ``,
         volumeType: ``
     });
 
+    const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setValue({ ...valueInput, [name]: value });
+    };
+
     return (<>
         <h2>Robot Form</h2>
-        <form onSubmit={(evt) => {
-            evt.preventDefault();
+        <form onSubmit={(e) => {
+            e.preventDefault();
             onFormSubmit(valueInput);
         }}>
             {
                 Object.entries(settings)
-                    .map(([key, _]) => (<React.Fragment key={key}>
+                    .map(([key, _]) => (<Fragment key={key}>
                         <label><b>{key}</b>:
                             <input
                                 name={key}
-                                onChange={(evt) => {
-                                    const { name, value } = evt.target;
-                                    setValue({ ...valueInput, [name]: value });
-                                }}
+                                onChange={onValueChange}
                             />
                         </label>
-                    </React.Fragment>)
+                    </Fragment>)
                     )}
             <button type="submit">Update form</button>
         </form>

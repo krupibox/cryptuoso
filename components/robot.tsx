@@ -5,7 +5,7 @@ interface Props {
     name: string;
 }
 
-const Robot: React.FC<Props> = ({ id, name }: Props): JSX.Element => {
+const Robot: React.FC<Props> = ({ id, name }) => {
 
     return (<>
         <ul>
