@@ -12,7 +12,7 @@ interface Props {
   robot_settings: { robot_settings: FormValueArgsType };
 }
 
-const DetailRobot: React.FC<Props> = ({ id, name, robot_settings }): JSX.Element => {
+const DetailRobot: React.FC<Props> = ({ id, name, robot_settings }) => {
 
   const { robot_settings: settings } = robot_settings;
 

@@ -19,7 +19,7 @@ interface Props {
   id: string;
 }
 
-const Robot: NextPage<Props> = ({ id }) =>  {
+const Robot: NextPage<Props> = ({ id }) => {
   const { loading, error, data } = useQuery(GET_ROBOT, {
     variables: {
       id: { "_eq": `${id}` },
@@ -28,12 +28,14 @@ const Robot: NextPage<Props> = ({ id }) =>  {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  
+
+  let [robots] = data.robots;
+
   return (<>
-    <DetailRobot {...data.robots[data.robots.findIndex((robot: any) => robot.id === id)]} />
+    <DetailRobot {...robots} />
     <Link href="/robots">
       <a>Back to list</a>
-    </Link> 
+    </Link>
   </>)
 }
 

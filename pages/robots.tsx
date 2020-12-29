@@ -7,10 +7,7 @@ const GET_ROBOTS = gql`
     query GetRobots($offset: Int!, $limit: Int!) {
         robots(offset: $offset, limit: $limit) {
             id
-            name
-            robot_settings {
-                robot_settings
-            }
+            code
         }
     }
 `;
@@ -44,20 +41,18 @@ const Robots: NextPage = () => {
             }
         }).then((moreResult: { data: any }) => {
             setOffset(currentLength + moreResult.data.robots.length);
-            toogleButton(Query.LIMIT > moreResult.data.robots.length);   
-            console.log(Query.LIMIT, moreResult.data.robots.length);        
+            toogleButton(Query.LIMIT > moreResult.data.robots.length);          
         });    
 
     };
 
-
     return (
         <>
             <h1>Robots </h1>
-            {data.robots.map((robot: { id: string, name: string }) => (
+            {data.robots.map((robot: { id: string, code: string }) => (
                 <Robot key={robot.id} {...robot} />
             ))}
-            { button ? <p>No more robots</p> : <button onClick={handleLoadMore}>Load more</button>}
+            { button ? <p>NO MORE</p> : <button onClick={handleLoadMore}>LOAD MORE</button>}
         </>
     );
 };
