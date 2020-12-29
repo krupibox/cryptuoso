@@ -1,6 +1,11 @@
 import Link from 'next/link';
 
-const Robot = ({ id, name }) => {
+interface Props {
+    id: string;
+    name: string;
+}
+
+const Robot: React.FC<Props> = ({ id, name }: Props): JSX.Element => {
 
     return (<>
         <ul>
@@ -20,8 +25,8 @@ const Robot = ({ id, name }) => {
                 li a:hover {color: red;}
                 a {text-decoration: none;
                     color: black;}
-            `}</style>   
-       </> )
+            `}</style>
+    </>)
 }
 
 export default Robot;

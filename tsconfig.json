@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/robots.txs"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,10 +1,25 @@
 import { useState } from 'react';
-import Form from '../components/form';
+import Form from './form';
 
-const DetailRobot = ({ id, name, robot_settings }) => {
+type FormValueArgsType = {
+  volume: string;
+  volumeType: string;
+}
+
+interface Props {
+  id: String;
+  name: string;
+  robot_settings: object;
+}
+
+const DetailRobot: React.FC<Props> = ({ id, name, robot_settings }): JSX.Element => {
 
   const { robot_settings: settings } = robot_settings;
-  const [formValue, setFormValue] = useState(``);
+
+  const [formValue, setFormValue] = useState<FormValueArgsType>({
+    volume: ``,
+    volumeType: ``
+  });
 
   const handleSubmit = (formValue) => {
     setFormValue(formValue);

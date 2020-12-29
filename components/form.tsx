@@ -1,9 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
 
-const Form = ({ settings, onFormSubmit }) => {
+type FormValueArgsType = {
+        volume: string;
+        volumeType: string;
+}
 
-    const [valueInput, setValue] = useState({
+interface Props {
+    settings: object;
+    onFormSubmit: (args: FormValueArgsType) => void;
+}
+
+const Form: React.FC<Props> = ({ settings, onFormSubmit }): JSX.Element => {
+
+    const [valueInput, setValue] = useState<FormValueArgsType>({
         volume: ``,
         volumeType: ``
     });
@@ -13,7 +23,6 @@ const Form = ({ settings, onFormSubmit }) => {
         <form onSubmit={(evt) => {
             evt.preventDefault();
             onFormSubmit(valueInput);
-
         }}>
             {
                 Object.entries(settings)
