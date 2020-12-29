@@ -3,6 +3,19 @@ import { NextPage } from 'next';
 import { useQuery, gql } from '@apollo/client';
 import DetailRobot from '../../../components/detail-robot';
 
+interface RobotsData {
+  robots: {
+    id: string;
+    name: string;
+    robot_settings: {
+      robot_settings: {
+        volume: number;
+        volumeType: string;
+      }
+    };
+  }
+}
+
 const GET_ROBOT = gql`
 query GetRobot($id: uuid_comparison_exp) {
   robots(where: {id: $id}) {
@@ -20,7 +33,7 @@ interface Props {
 }
 
 const Robot: NextPage<Props> = ({ id }) => {
-  const { loading, error, data } = useQuery(GET_ROBOT, {
+  const { loading, error, data } = useQuery<RobotsData>(GET_ROBOT, {
     variables: {
       id: { "_eq": `${id}` },
     },
@@ -29,10 +42,10 @@ const Robot: NextPage<Props> = ({ id }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  let [robots] = data.robots;
+  let { robots } = data;
 
   return (<>
-    <DetailRobot {...robots} />
+    <DetailRobot {...robots[0]} />
     <Link href="/robots">
       <a>Back to list</a>
     </Link>

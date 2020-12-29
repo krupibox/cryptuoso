@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, Fragment } from 'react';
 
 type FormValueArgsType = {
-    volume: string;
+    volume: number;
     volumeType: string;
 }
 
@@ -13,7 +13,7 @@ interface Props {
 const Form: React.FC<Props> = ({ settings, onFormSubmit }) => {
 
     const [valueInput, setValue] = useState<FormValueArgsType>({
-        volume: ``,
+        volume: 0,
         volumeType: ``
     });
 
