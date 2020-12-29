@@ -28,7 +28,7 @@ const Robot: NextPage<Props> = ({ id }) =>  {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
+  
   return (<>
     <DetailRobot {...data.robots[data.robots.findIndex((robot: any) => robot.id === id)]} />
     <Link href="/robots">

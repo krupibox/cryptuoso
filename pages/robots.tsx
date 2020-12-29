@@ -22,6 +22,7 @@ const Robots: NextPage = () => {
     };
 
     const [offset, setOffset] = useState<number>(Query.OFFSET);
+    const [button, toogleButton] = useState<boolean>(false);
 
     const { loading, error, data, fetchMore } = useQuery(GET_ROBOTS, {
         variables: {
@@ -34,14 +35,21 @@ const Robots: NextPage = () => {
     if (error) return <div>Error : (</div>;
 
     const handleLoadMore = (e: MouseEvent<HTMLElement>) => {
+        let currentLength = data.robots.length;
+
         fetchMore({
             variables: {
-                offset: data.robots.length + Query.LIMIT
+                offset: currentLength,
+                limit: Query.LIMIT
             }
         }).then((moreResult: { data: any }) => {
-            setOffset(moreResult.data.robots.length);
-        });
+            setOffset(currentLength + moreResult.data.robots.length);
+            toogleButton(Query.LIMIT > moreResult.data.robots.length);   
+            console.log(Query.LIMIT, moreResult.data.robots.length);        
+        });    
+
     };
+
 
     return (
         <>
@@ -49,7 +57,7 @@ const Robots: NextPage = () => {
             {data.robots.map((robot: { id: string, name: string }) => (
                 <Robot key={robot.id} {...robot} />
             ))}
-            <button onClick={handleLoadMore}>Load more</button>
+            { button ? <p>No more robots</p> : <button onClick={handleLoadMore}>Load more</button>}
         </>
     );
 };
