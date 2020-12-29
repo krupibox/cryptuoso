@@ -43,7 +43,7 @@ const Robot: NextPage<Props> = ({ id }) => {
   if (error) return <p>Error :(</p>;
 
   let { robots } = data;
-
+  
   return (<>
     <DetailRobot {...robots[0]} />
     <Link href="/robots">

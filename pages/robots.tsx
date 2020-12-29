@@ -5,10 +5,10 @@ import Robot from '../components/robot';
 
 interface RobotsData {
     robots: {
-      id: string;
-      code: string;
+        id: string;
+        code: string;
     }
-  }
+}
 
 const GET_ROBOTS = gql`
     query GetRobots($offset: Int!, $limit: Int!) {
@@ -28,7 +28,7 @@ const Robots: NextPage = () => {
     const [offset, setOffset] = useState<number>(Query.OFFSET);
     const [button, toogleButton] = useState<boolean>(false);
 
-    const { loading, error, data, fetchMore } = useQuery<RobotsData>(GET_ROBOTS, {
+    const { loading, error, data = [], fetchMore } = useQuery<RobotsData>(GET_ROBOTS, {
         variables: {
             offset,
             limit: Query.LIMIT
@@ -38,8 +38,10 @@ const Robots: NextPage = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error : (</div>;
 
+    let { robots }: any = data;
+
     const handleLoadMore = (e: MouseEvent<HTMLElement>) => {
-        let currentLength = data.robots.length;
+        let currentLength = robots.length;
 
         fetchMore({
             variables: {
@@ -48,15 +50,15 @@ const Robots: NextPage = () => {
             }
         }).then((moreResult: { data: any }) => {
             setOffset(currentLength + moreResult.data.robots.length);
-            toogleButton(Query.LIMIT > moreResult.data.robots.length);          
-        });    
+            toogleButton(Query.LIMIT > moreResult.data.robots.length);
+        });
 
     };
 
     return (
         <>
             <h1>Robots </h1>
-            {data.robots.map((robot: { id: string, code: string }) => (
+            {robots.map((robot: { id: string, code: string }) => (
                 <Robot key={robot.id} {...robot} />
             ))}
             { button ? <p>NO MORE</p> : <button onClick={handleLoadMore}>LOAD MORE</button>}
