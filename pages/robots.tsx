@@ -12,10 +12,10 @@ interface RobotsData {
 
 const GET_ROBOTS = gql`
     query GetRobots($offset: Int!, $limit: Int!) {
-        robots(offset: $offset, limit: $limit) {
+        robots(order_by: {id: asc, code: asc}, offset: $offset, limit: $limit) {
             id
             code
-        }
+    }
     }
 `;
 
